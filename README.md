@@ -1,6 +1,6 @@
 #### Complete App
 
-[Jobify](https://jobify.live/)
+[Membership]
 
 #### Create React APP
 
@@ -32,7 +32,7 @@ npm run dev
 
 ```jsx
 const App = () => {
-  return <h1>Jobify App</h1>;
+  return <h1>Membership App</h1>;
 };
 export default App;
 ```
@@ -65,7 +65,7 @@ export default App;
 ```html
 <head>
   <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
-  <title>Jobify</title>
+  <title>Membership</title>
 </head>
 ```
 
@@ -102,26 +102,58 @@ npm i react-router-dom@6.10.0
 App.jsx
 
 ```jsx
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+  HomeLayout,
+  LandingPage,
+  RegisterPage,
+  LoginPage,
+  ErrorPage,
+  DashboardLayout,
+  Membership,
+  AdminPage,
+} from "./pages";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <h1>home</h1>,
-  },
-  {
-    path: "/about",
-    element: (
-      <div>
-        <h2>about page</h2>
-      </div>
-    ),
+    element: <HomeLayout />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        index: true,
+        element: <LandingPage />,
+      },
+      {
+        path: "Register",
+        element: <RegisterPage />,
+      },
+      {
+        path: "Login",
+        element: <LoginPage />,
+      },
+      {
+        path: "Dashboard",
+        element: <DashboardLayout />,
+        children: [
+          {
+            index: true,
+            element: <Membership />,
+          },
+          {
+            path: "Admin",
+            element: <AdminPage />,
+          },
+        ],
+      },
+    ],
   },
 ]);
 
 const App = () => {
   return <RouterProvider router={router} />;
 };
+
 export default App;
 ```
 
@@ -130,26 +162,15 @@ export default App;
 - create src/pages directory
 - setup index.js and following pages :
 
-  AddJob.jsx
   Admin.jsx
-  AllJobs.jsx
   DashboardLayout.jsx
-  DeleteJob.jsx
-  EditJob.jsx
   Error.jsx
   HomeLayout.jsx
   Landing.jsx
   Login.jsx
   Profile.jsx
   Register.jsx
-  Stats.jsx
-
-```jsx
-const AddJob = () => {
-  return <h1>AddJob</h1>;
-};
-export default AddJob;
-```
+  Membership.jsx
 
 #### Index
 
@@ -163,17 +184,13 @@ pages/index.js
 
 ```js
 export { default as DashboardLayout } from "./DashboardLayout";
-export { default as Landing } from "./Landing";
+export { default as LandingPage } from "./LandingPage";
 export { default as HomeLayout } from "./HomeLayout";
-export { default as Register } from "./Register";
-export { default as Login } from "./Login";
-export { default as Error } from "./Error";
-export { default as Stats } from "./Stats";
-export { default as AllJobs } from "./AllJobs";
-export { default as AddJob } from "./AddJob";
-export { default as EditJob } from "./EditJob";
-export { default as Profile } from "./Profile";
-export { default as Admin } from "./Admin";
+export { default as RegisterPage } from "./RegisterPage";
+export { default as LoginPage } from "./LoginPage";
+export { default as ErrorPage } from "./ErrorPage";
+export { default as Membership } from "./Membership";
+export { default as AdminPage } from "./AdminPage";
 ```
 
 App.jsx
@@ -355,4 +372,14 @@ export default Error;
 - [Styled Components Docs](https://styled-components.com/)
 - [Styled Components Course](https://www.udemy.com/course/styled-components-tutorial-and-project-course/?referralCode=9DABB172FCB2625B663F)
 
-```sh
+# Shape of Weather App
+
+![Mobile Image](./Docs/HomeDashboardMobile.png)
+![Mobile Image](./Docs/RegisterMobile.png)
+![Mobile Image](./Docs/LoginMobile.png)
+![Mobile Image](./Docs/MembershipListMobile.png)
+
+![Web Image](./Docs/HomeDashboardWeb.png)
+![Web Image](./Docs/RegisterWeb.png)
+![Web Image](./Docs/LoginWeb.png)
+![Web Image](./Docs/MembershipListMobile.png)
